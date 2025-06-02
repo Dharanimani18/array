@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+  }
+
+  h2 {
+    margin-top: 40px;
+    font-size: 26px;
+    color: #2c3e50;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    padding: 12px;
+    width: 280px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 10px 0;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  button {
+    padding: 10px 25px;
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: linear-gradient(to right, #9face6, #74ebd5);
+  }
+
+  #result,
+  #output {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-top: 10px;
+  }
+</style>
+
+<body>
+
+  <h2>To Find the Second Largest Number</h2>
+  <button onclick="button()">Click Here</button>
+  <p id="result"></p>
+  
+  
+  <h2>Vowel Counter</h2>
+
+  <input type="text" id="sentenceInput" placeholder="Enter a sentence here">
+  <button onclick="countVowels()">Count Vowels</button>
+
+  <div id="result"></div>
+
+  <h2>Reverse a Number (Using Array)</h2>
+
+  <input type="number" id="numInput" placeholder="Enter a number">
+  <button onclick="reverseUsingArray()">Reverse</button>
+
+  <div id="output"></div>
+  <script>
+
+  function button(){
+    let numbers = [];
+
+    for (let i = 0; i < 5; i++) {
+      let num = prompt(`Enter number ${i + 1}:`);
+      if (Number(num)) {
+        numbers.push(num);
+      } else {
+        alert("Please enter a valid number.");
+        i--;
+      }
+    }
+
+
+    let largest = -Infinity;
+    let secondLargest = -Infinity;
+
+    for (let i = 0; i < numbers.length; i++) {
+      let num = numbers[i];
+
+      if (num > largest) {
+        secondLargest = largest;
+        largest = num;
+      } else if (num > secondLargest && num < largest) {
+        secondLargest = num;
+      }
+    }
+
+    if (secondLargest === -Infinity) {
+      alert("No second largest number found (all numbers might be the same).");
+    } else {
+      alert("The second largest number is: " + secondLargest);
+      console.log("Second largest:", secondLargest);
+    }
+  }
+    
+
+    function countVowels() {
+      const sentence = document.getElementById("sentenceInput").value;
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+      let count = 0;
+
+      let lowerSentence = sentence.toLowerCase();
+      for (let i = 0; i < lowerSentence.length; i++) {
+        let char = lowerSentence[i];
+
+        {
+          if (vowels.includes(char)) {
+            count++;
+          }
+        }
+
+        document.getElementById("result").innerText = `Number of vowels: ${count}`;
+      }
+    }
+
+    function reverseUsingArray() {
+      let num = document.getElementById("numInput").value;
+
+
+      let digitsArray = Array.from(num.toString());
+
+      let reversedArray = [];
+      for (let i = digitsArray.length - 1; i >= 0; i--) {
+        reversedArray.push(digitsArray[i]);
+      }
+
+      let reversedNumber = reversedArray.join("");
+      document.getElementById("output").innerText = "Reversed Number: " + reversedNumber;
+    }
+
+  </script>
+</body>
+
+</html>
